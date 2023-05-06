@@ -1,0 +1,45 @@
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    phone_number VARCHAR(20),
+    enrollment_status VARCHAR(20)
+);
+
+CREATE TABLE classes (
+    class_id INT PRIMARY KEY,
+    class_name VARCHAR(50),
+    instructor_id INT,
+    start_date DATE,
+    end_date DATE,
+    credits INT
+);
+
+CREATE TABLE instructors (
+    instructor_id INT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    phone_number VARCHAR(20)
+);
+
+CREATE TABLE assignments (
+    assignment_id INT PRIMARY KEY,
+    assignment_name VARCHAR(50),
+    class_id INT,
+    max_points INT,
+    due_date DATE
+);
+
+CREATE TABLE grades (
+    grade_id INT PRIMARY KEY,
+    student_id INT,
+    assignment_id INT,
+    points INT,
+    date_submitted DATE,
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id)
+);
+
+ALTER TABLE classes ADD FOREIGN KEY (instructor_id) REFERENCES instructors(instructor_id);
